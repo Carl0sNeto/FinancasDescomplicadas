@@ -53,7 +53,7 @@
       try {
         await comCarregamento(form.querySelector('button'), async () => {
           const resposta = await api('/auth/login', { metodo: 'POST', corpo: { email, senha } });
-          salvarSessao({ token: resposta.token, nome: resposta.nome, email: resposta.email });
+          salvarSessao({ token: resposta.token, nome: resposta.nome, email: resposta.email, papel: resposta.papel });
           window.location.href = 'painel.html';
         });
       } catch (erro) {

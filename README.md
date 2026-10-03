@@ -43,12 +43,13 @@ Sem o perfil `dev`, a aplicação usa PostgreSQL e lê a configuração de vari�
 | `JWT_SECRET` | — (**obrigatória**) | Chave do JWT, mínimo de 32 caracteres |
 | `JWT_VALIDADE_MS` | `86400000` (24 h) | Validade do token |
 | `CORS_ORIGENS` | `http://localhost:5500,...` | Origens do frontend liberadas, separadas por vírgula |
-| `USUARIO_INICIAL_NOME` / `_EMAIL` / `_SENHA` | vazio | Se preenchidas, cria essa conta na subida (se ainda não existir) |
+| `USUARIO_INICIAL_NOME` / `_EMAIL` / `_SENHA` | vazio | Conta **administradora**: criada na subida se não existir (se já existir, é promovida a admin) |
 | `PORT` | `8080` | Porta HTTP (o Render define sozinho) |
 | `DB_POOL_SIZE` | `5` | Máximo de conexões com o banco |
 
-Não existe cadastro público: as contas são criadas pelas variáveis `USUARIO_INICIAL_*` (ver
-[`UsuarioInicialConfig`](src/main/java/com/carlos/financasdescomplicadas/config/UsuarioInicialConfig.java)).
+Não existe cadastro público. A conta de `USUARIO_INICIAL_*` é a administradora (ver
+[`UsuarioInicialConfig`](src/main/java/com/carlos/financasdescomplicadas/config/UsuarioInicialConfig.java)):
+ela vê o menu **Administração** no site, onde cria as contas das outras pessoas, troca senhas e exclui contas.
 
 ## API
 
@@ -69,6 +70,9 @@ Erros voltam como JSON `{status, erro, mensagem, campos}`.
 | POST | `/importacoes` | Upload multipart (campo `arquivo`, `.ofx` ou `.csv`) |
 | GET / DELETE | `/importacoes`, `/importacoes/{id}` | Histórico / desfazer importação |
 | GET / DELETE | `/regras`, `/regras/{id}` | Regras de categorização aprendidas |
+| GET / POST | `/admin/usuarios` | **Só ADMIN**: lista / cria contas (`{nome, email, senha, papel}`) |
+| PUT | `/admin/usuarios/{id}/senha` | **Só ADMIN**: troca a senha de uma conta |
+| DELETE | `/admin/usuarios/{id}` | **Só ADMIN**: exclui a conta e todos os dados dela |
 
 ## Documentação
 

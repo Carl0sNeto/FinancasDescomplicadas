@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administração · Finanças Descomplicadas</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main>
+    <div class="cabecalho-pagina">
+      <h1>Administração</h1>
+    </div>
+
+    <section class="cartao">
+      <h2>Nova conta</h2>
+      <p class="texto-suave" style="margin-top: -6px">
+        A pessoa entra com este email e senha. A conta já vem com as categorias padrão.
+      </p>
+      <form id="form-novo" novalidate>
+        <div class="linha-campos">
+          <div class="campo">
+            <label for="novo-nome">Nome</label>
+            <input id="novo-nome" name="nome" maxlength="100" required>
+          </div>
+          <div class="campo">
+            <label for="novo-email">Email</label>
+            <input id="novo-email" name="email" type="email" maxlength="150" required autocomplete="off">
+          </div>
+        </div>
+        <div class="linha-campos">
+          <div class="campo">
+            <label for="novo-senha">Senha (mínimo 8 caracteres)</label>
+            <input id="novo-senha" name="senha" type="password" minlength="8" maxlength="72" required autocomplete="new-password">
+          </div>
+          <div class="campo">
+            <label for="novo-papel">Perfil</label>
+            <select id="novo-papel" name="papel">
+              <option value="USUARIO">Usuário</option>
+              <option value="ADMIN">Administrador (pode gerenciar contas)</option>
+            </select>
+          </div>
+        </div>
+        <div class="acoes">
+          <button type="submit">Criar conta</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="cartao">
+      <h2>Contas</h2>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Perfil</th>
+              <th class="opcional">Criada em</th>
+              <th><span class="sr-only">Ações</span></th>
+            </tr>
+          </thead>
+          <tbody id="lista"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="dialogo-senha">
+    <form id="form-senha" method="dialog" novalidate>
+      <h2>Trocar senha</h2>
+      <p class="texto-suave" id="senha-usuario" style="margin-top: -8px"></p>
+      <div class="campo">
+        <label for="nova-senha">Nova senha (mínimo 8 caracteres)</label>
+        <input id="nova-senha" name="senha" type="password" minlength="8" maxlength="72" required autocomplete="new-password">
+      </div>
+      <div class="acoes">
+        <button type="button" class="secundario" data-fechar>Cancelar</button>
+        <button type="submit">Salvar senha</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -14,6 +14,10 @@
     ['metas.html', 'Metas'],
     ['importar.html', 'Importar extrato'],
   ];
+  // Só esconde o link: quem protege de verdade é a API (/admin/** exige ADMIN)
+  if (sessao.papel === 'ADMIN') {
+    paginas.push(['admin.html', 'Administração']);
+  }
   const atual = window.location.pathname.split('/').pop() || 'painel.html';
 
   const topo = document.createElement('header');

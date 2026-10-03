@@ -36,5 +36,5 @@
 3. **Detecção de duplicadas na importação** — hoje importar o mesmo extrato duas vezes duplica as
    transações (dá pra desfazer pela tela de importação). Uma opção é guardar o `FITID` do OFX
 4. **Paginação** em `GET /transacoes` quando o volume crescer
-5. **Endpoint admin** pra criar contas (hoje é pelas variáveis `USUARIO_INICIAL_*`)
+5. ~~**Endpoint admin** pra criar contas~~ — feito: papel `ADMIN`, rotas `/admin/usuarios` e página `admin.html`
 6. **Gráfico de evolução mensal** no painel (receitas x despesas dos últimos meses)
