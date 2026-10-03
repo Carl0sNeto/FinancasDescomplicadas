@@ -1,0 +1,32 @@
+# Blueprint do Render: cria a API (Docker) e o site estático do frontend.
+# No painel do Render: New > Blueprint > escolha este repositório.
+# Os valores marcados com "sync: false" são pedidos na criação (ver docs/09-deploy-render-neon.md).
+services:
+  - type: web
+    name: financas-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGENS
+        sync: false
+      - key: USUARIO_INICIAL_NOME
+        sync: false
+      - key: USUARIO_INICIAL_EMAIL
+        sync: false
+      - key: USUARIO_INICIAL_SENHA
+        sync: false
+
+  - type: web
+    name: financas-web
+    runtime: static
+    buildCommand: echo "frontend estático, sem build"
+    staticPublishPath: ./frontend
