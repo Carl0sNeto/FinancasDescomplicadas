@@ -50,7 +50,11 @@ async function api(caminho, { metodo = 'GET', corpo } = {}) {
   try {
     resposta = await fetch(API_URL + caminho, { method: metodo, headers, body });
   } catch {
-    throw new ErroApi(0, { mensagem: 'Não foi possível conectar à API. Ela está rodando?' });
+    // O navegador não diferencia API fora do ar de bloqueio por CORS: detalhes no console (F12)
+    throw new ErroApi(0, {
+      mensagem: 'Não foi possível conectar à API. Ela pode estar iniciando (aguarde ~1 minuto) '
+        + 'ou este site não está liberado em CORS_ORIGENS.',
+    });
   }
 
   if (resposta.status === 401 && caminho !== '/auth/login') {
