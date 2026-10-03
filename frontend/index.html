@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar · Finanças Descomplicadas</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main class="pagina-login">
+    <div class="cartao caixa-login">
+      <span class="marca">Finanças Descomplicadas</span>
+      <p class="texto-suave">Entre para organizar suas receitas, despesas e metas.</p>
+
+      <div id="erro-login" class="aviso erro" role="alert" hidden></div>
+
+      <form id="form-login" novalidate>
+        <div class="campo">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="campo">
+          <label for="senha">Senha</label>
+          <input id="senha" name="senha" type="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    if (obterSessao()?.token) {
+      window.location.href = 'painel.html';
+    }
+
+    const form = document.getElementById('form-login');
+    const caixaErro = document.getElementById('erro-login');
+
+    form.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      caixaErro.hidden = true;
+
+      const email = form.email.value.trim();
+      const senha = form.senha.value;
+      if (!email || !senha) {
+        caixaErro.textContent = 'Preencha email e senha.';
+        caixaErro.hidden = false;
+        return;
+      }
+
+      try {
+        await comCarregamento(form.querySelector('button'), async () => {
+          const resposta = await api('/auth/login', { metodo: 'POST', corpo: { email, senha } });
+          salvarSessao({ token: resposta.token, nome: resposta.nome, email: resposta.email });
+          window.location.href = 'painel.html';
+        });
+      } catch (erro) {
+        caixaErro.textContent = erro.message;
+        caixaErro.hidden = false;
+      }
+    });
+  </script>
+</body>
+</html>

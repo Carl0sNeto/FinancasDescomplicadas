@@ -1,0 +1,416 @@
+:root {
+  --fundo: #f4f6f8;
+  --superficie: #ffffff;
+  --borda: #e3e7ec;
+  --texto: #1d2733;
+  --texto-suave: #5f6b7a;
+  --primaria: #0f766e;
+  --primaria-escura: #0b5d57;
+  --primaria-clara: #e6f4f2;
+  --receita: #15803d;
+  --receita-clara: #e8f6ec;
+  --despesa: #c2410c;
+  --despesa-clara: #fdf0e8;
+  --alerta: #b45309;
+  --alerta-clara: #fef6e4;
+  --raio: 10px;
+  --sombra: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fundo);
+}
+
+h1, h2, h3 {
+  margin: 0;
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.1rem; }
+
+a { color: var(--primaria); }
+
+/* ---------- Cabeçalho ---------- */
+
+.topo {
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topo-conteudo {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 60px;
+  flex-wrap: wrap;
+}
+
+.marca {
+  font-weight: 700;
+  color: var(--primaria);
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+
+.menu {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--texto-suave);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.menu a:hover { background: var(--fundo); color: var(--texto); }
+.menu a.ativo { background: var(--primaria-clara); color: var(--primaria-escura); }
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+/* ---------- Layout ---------- */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.cabecalho-pagina {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+}
+
+.cartao + .cartao { margin-top: 16px; }
+
+.cartao h2 { margin-bottom: 14px; }
+
+.grade {
+  display: grid;
+  gap: 16px;
+}
+
+.grade-indicadores { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 16px; }
+.grade-2 { grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+.grade > .cartao + .cartao { margin-top: 0; }
+.grade + .cartao { margin-top: 16px; }
+
+.indicador .rotulo { color: var(--texto-suave); font-size: 0.85rem; }
+.indicador .numero { font-size: 1.5rem; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+.texto-suave { color: var(--texto-suave); }
+.receita { color: var(--receita); }
+.despesa { color: var(--despesa); }
+
+/* ---------- Formulários ---------- */
+
+label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+input, select {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  padding: 9px 11px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--superficie);
+}
+
+input:focus, select:focus, button:focus-visible {
+  outline: 2px solid var(--primaria);
+  outline-offset: 1px;
+}
+
+.campo { margin-bottom: 14px; }
+
+.linha-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.filtros {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.filtros .campo { margin-bottom: 0; min-width: 160px; }
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+
+.check input { width: auto; }
+
+/* ---------- Botões ---------- */
+
+button, .botao {
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 9px 16px;
+  cursor: pointer;
+  background: var(--primaria);
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+button:hover { background: var(--primaria-escura); }
+button:disabled { opacity: 0.6; cursor: wait; }
+
+button.secundario { background: var(--superficie); color: var(--texto); border-color: var(--borda); }
+button.secundario:hover { background: var(--fundo); }
+
+button.perigo { background: var(--superficie); color: var(--despesa); border-color: var(--borda); }
+button.perigo:hover { background: var(--despesa-clara); }
+
+button.pequeno { padding: 5px 10px; font-size: 0.85rem; }
+
+button.link {
+  background: none;
+  color: var(--texto-suave);
+  padding: 0;
+  font-weight: 500;
+}
+
+button.link:hover { color: var(--texto); background: none; }
+
+.acoes { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+
+/* ---------- Tabelas ---------- */
+
+.tabela-rolagem { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--borda);
+  vertical-align: middle;
+}
+
+th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+td.valor, th.valor { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.data { white-space: nowrap; color: var(--texto-suave); }
+
+tbody tr:last-child td { border-bottom: none; }
+
+.vazio {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 28px 8px;
+}
+
+/* ---------- Etiquetas ---------- */
+
+.etiqueta {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--fundo);
+  color: var(--texto-suave);
+}
+
+.etiqueta.receita { background: var(--receita-clara); color: var(--receita); }
+.etiqueta.despesa { background: var(--despesa-clara); color: var(--despesa); }
+.etiqueta.pendente { background: var(--alerta-clara); color: var(--alerta); }
+
+/* ---------- Barras (gastos por categoria e metas) ---------- */
+
+.barra-item + .barra-item { margin-top: 12px; }
+
+.barra-titulo {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.barra-titulo span:last-child { font-variant-numeric: tabular-nums; color: var(--texto-suave); }
+
+.barra {
+  height: 8px;
+  background: var(--fundo);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.barra > div {
+  height: 100%;
+  background: var(--primaria);
+  border-radius: 999px;
+}
+
+.barra.despesa > div { background: var(--despesa); }
+.barra.concluida > div { background: var(--receita); }
+
+/* ---------- Metas ---------- */
+
+.meta-cabecalho { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.meta-valores { font-size: 1.3rem; font-weight: 700; margin: 10px 0 8px; font-variant-numeric: tabular-nums; }
+.meta-valores small { font-size: 0.9rem; font-weight: 400; color: var(--texto-suave); }
+.meta-rodape { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--texto-suave); margin-top: 8px; }
+.meta-movimento { display: flex; gap: 8px; margin-top: 14px; }
+.meta-movimento input { flex: 1; min-width: 0; }
+
+/* ---------- Diálogos ---------- */
+
+dialog {
+  border: none;
+  border-radius: var(--raio);
+  padding: 24px;
+  width: min(460px, calc(100% - 32px));
+  box-shadow: 0 20px 40px rgba(16, 24, 40, 0.2);
+  color: var(--texto);
+}
+
+dialog::backdrop { background: rgba(16, 24, 40, 0.45); }
+dialog h2 { margin-bottom: 18px; }
+dialog .acoes { margin-top: 20px; }
+
+/* ---------- Avisos ---------- */
+
+.aviso {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background: var(--alerta-clara);
+  color: var(--alerta);
+  border: 1px solid #f5dfb3;
+}
+
+.aviso.erro { background: var(--despesa-clara); color: var(--despesa); border-color: #f6d3bf; }
+.aviso.sucesso { background: var(--receita-clara); color: var(--receita); border-color: #c4e8cf; }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--texto);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(16, 24, 40, 0.25);
+  z-index: 100;
+  max-width: calc(100% - 32px);
+}
+
+.toast.erro { background: var(--despesa); }
+
+[hidden] { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Login ---------- */
+
+.pagina-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.caixa-login { width: min(380px, 100%); }
+.caixa-login .marca { display: block; font-size: 1.4rem; margin-bottom: 4px; }
+.caixa-login p { margin: 0 0 22px; }
+.caixa-login button { width: 100%; justify-content: center; margin-top: 6px; }
+
+/* ---------- Importação ---------- */
+
+.zona-upload {
+  border: 2px dashed var(--borda);
+  border-radius: var(--raio);
+  padding: 28px 16px;
+  text-align: center;
+  background: var(--fundo);
+}
+
+.zona-upload.arrastando { border-color: var(--primaria); background: var(--primaria-clara); }
+.zona-upload input { max-width: 360px; margin: 12px auto 0; background: var(--superficie); }
+
+@media (max-width: 640px) {
+  .topo-conteudo { gap: 6px 12px; padding-top: 10px; padding-bottom: 8px; }
+  .marca { flex: 1; }
+  .usuario { order: 2; }
+  .menu { order: 3; flex: 0 0 100%; flex-wrap: nowrap; overflow-x: auto; }
+  .menu a { white-space: nowrap; }
+  .usuario span { display: none; }
+  .indicador .numero { font-size: 1.25rem; }
+  th.opcional, td.opcional { display: none; }
+}

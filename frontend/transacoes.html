@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transações · Finanças Descomplicadas</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main>
+    <div class="cabecalho-pagina">
+      <h1>Transações</h1>
+      <button type="button" id="botao-nova">+ Nova transação</button>
+    </div>
+
+    <section class="cartao">
+      <div class="filtros">
+        <div class="campo">
+          <label for="filtro-mes">Mês</label>
+          <input id="filtro-mes" type="month">
+        </div>
+        <div class="campo">
+          <label for="filtro-categoria">Categoria</label>
+          <select id="filtro-categoria">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label class="check"><input id="filtro-pendentes" type="checkbox"> Só sem categoria (todas as datas)</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="cartao">
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Descrição</th>
+              <th>Categoria</th>
+              <th class="valor">Valor</th>
+              <th><span class="sr-only">Ações</span></th>
+            </tr>
+          </thead>
+          <tbody id="lista"></tbody>
+        </table>
+      </div>
+      <p class="texto-suave" id="rodape-lista" style="margin: 12px 0 0"></p>
+    </section>
+  </main>
+
+  <!-- Criar / editar transação -->
+  <dialog id="dialogo-transacao">
+    <form id="form-transacao" method="dialog" novalidate>
+      <h2 id="titulo-dialogo">Nova transação</h2>
+      <div class="campo">
+        <label for="t-tipo">Tipo</label>
+        <select id="t-tipo" name="tipo">
+          <option value="DESPESA">Despesa</option>
+          <option value="RECEITA">Receita</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="t-descricao">Descrição</label>
+        <input id="t-descricao" name="descricao" maxlength="255" required>
+      </div>
+      <div class="linha-campos">
+        <div class="campo">
+          <label for="t-valor">Valor (R$)</label>
+          <input id="t-valor" name="valor" type="number" min="0.01" step="0.01" inputmode="decimal" required>
+        </div>
+        <div class="campo">
+          <label for="t-data">Data</label>
+          <input id="t-data" name="data" type="date" required>
+        </div>
+      </div>
+      <div class="campo">
+        <label for="t-categoria">Categoria</label>
+        <select id="t-categoria" name="categoriaId"></select>
+      </div>
+      <div class="acoes">
+        <button type="button" class="secundario" data-fechar>Cancelar</button>
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Categorizar transação pendente -->
+  <dialog id="dialogo-categorizar">
+    <form id="form-categorizar" method="dialog" novalidate>
+      <h2>Categorizar transação</h2>
+      <p class="texto-suave" id="c-descricao" style="margin-top: -8px"></p>
+      <div class="campo">
+        <label for="c-categoria">Categoria</label>
+        <select id="c-categoria" name="categoriaId" required></select>
+      </div>
+      <div class="campo">
+        <label class="check"><input id="c-lembrar" name="lembrar" type="checkbox" checked> Lembrar nas próximas importações</label>
+      </div>
+      <div class="campo" id="c-campo-palavra">
+        <label for="c-palavra">Quando a descrição contiver</label>
+        <input id="c-palavra" name="palavraChave" maxlength="150">
+        <small class="texto-suave">Dica: deixe só a parte que se repete, ex.: "ifood" ou "uber".</small>
+      </div>
+      <div class="acoes">
+        <button type="button" class="secundario" data-fechar>Cancelar</button>
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/transacoes.js"></script>
+</body>
+</html>

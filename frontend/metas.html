@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metas · Finanças Descomplicadas</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main>
+    <div class="cabecalho-pagina">
+      <h1>Metas</h1>
+      <button type="button" id="botao-nova">+ Nova meta</button>
+    </div>
+
+    <div id="lista" class="grade grade-2"></div>
+  </main>
+
+  <dialog id="dialogo-meta">
+    <form id="form-meta" method="dialog" novalidate>
+      <h2 id="titulo-dialogo">Nova meta</h2>
+      <div class="campo">
+        <label for="m-titulo">Objetivo</label>
+        <input id="m-titulo" name="titulo" maxlength="100" required placeholder="Ex.: Reserva de emergência">
+      </div>
+      <div class="linha-campos">
+        <div class="campo">
+          <label for="m-alvo">Quanto quer juntar (R$)</label>
+          <input id="m-alvo" name="valorAlvo" type="number" min="0.01" step="0.01" inputmode="decimal" required>
+        </div>
+        <div class="campo">
+          <label for="m-atual">Já guardado (R$)</label>
+          <input id="m-atual" name="valorAtual" type="number" min="0" step="0.01" inputmode="decimal">
+        </div>
+      </div>
+      <div class="campo">
+        <label for="m-data">Até quando (opcional)</label>
+        <input id="m-data" name="dataLimite" type="date">
+      </div>
+      <div class="acoes">
+        <button type="button" class="secundario" data-fechar>Cancelar</button>
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/metas.js"></script>
+</body>
+</html>
