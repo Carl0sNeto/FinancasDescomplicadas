@@ -31,8 +31,7 @@
 
 ## Pendente — sugestões
 
-1. **Deploy** — backend no Render/Railway (variáveis no `README.md`), frontend no Vercel/Netlify
-   (ajustar `API_URL` em `frontend/js/config.js` e `CORS_ORIGENS` no backend)
+1. **Deploy** — `Dockerfile` e `render.yaml` prontos; passo a passo em `docs/09-deploy-render-neon.md`
 2. **Migrações com Flyway** no lugar de `ddl-auto=update` — mais seguro pra evoluir o banco em produção
 3. **Detecção de duplicadas na importação** — hoje importar o mesmo extrato duas vezes duplica as
    transações (dá pra desfazer pela tela de importação). Uma opção é guardar o `FITID` do OFX

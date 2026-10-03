@@ -45,6 +45,7 @@ Sem o perfil `dev`, a aplicação usa PostgreSQL e lê a configuração de vari�
 | `CORS_ORIGENS` | `http://localhost:5500,...` | Origens do frontend liberadas, separadas por vírgula |
 | `USUARIO_INICIAL_NOME` / `_EMAIL` / `_SENHA` | vazio | Se preenchidas, cria essa conta na subida (se ainda não existir) |
 | `PORT` | `8080` | Porta HTTP (o Render define sozinho) |
+| `DB_POOL_SIZE` | `5` | Máximo de conexões com o banco |
 
 Não existe cadastro público: as contas são criadas pelas variáveis `USUARIO_INICIAL_*` (ver
 [`UsuarioInicialConfig`](src/main/java/com/carlos/financasdescomplicadas/config/UsuarioInicialConfig.java)).
@@ -79,3 +80,4 @@ Erros voltam como JSON `{status, erro, mensagem, campos}`.
 | [`docs/05-seguranca-autenticacao.md`](docs/05-seguranca-autenticacao.md) | Fluxo de login e JWT |
 | [`docs/06-estrutura-pastas.md`](docs/06-estrutura-pastas.md) | Organização de pacotes |
 | [`docs/08-proximos-passos.md`](docs/08-proximos-passos.md) | O que foi feito e o que falta |
+| [`docs/09-deploy-render-neon.md`](docs/09-deploy-render-neon.md) | Passo a passo do deploy no Render + Neon |

@@ -1,0 +1,12 @@
+target/
+data/
+frontend/
+docs/
+.git/
+.github/
+.vscode/
+.claude/
+.mvn/
+mvnw
+mvnw.cmd
+HELP.md
