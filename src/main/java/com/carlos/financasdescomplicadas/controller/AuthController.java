@@ -40,6 +40,7 @@ public class AuthController {
         Usuario usuario = usuarioRepository.findByEmail(requestDTO.email())
                 .orElseThrow();
 
-        return ResponseEntity.ok(new LoginResponseDTO(token, usuario.getNome(), usuario.getEmail()));
+        return ResponseEntity.ok(new LoginResponseDTO(
+                token, usuario.getNome(), usuario.getEmail(), usuario.getPapel()));
     }
 }

@@ -35,7 +35,7 @@ As tabelas são criadas automaticamente na primeira subida (`ddl-auto=update`).
    |---|---|
    | `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` | Da etapa 1 |
    | `CORS_ORIGENS` | URL do frontend, ex.: `https://financas-web.onrender.com` (sem `/` no final) |
-   | `USUARIO_INICIAL_NOME` / `_EMAIL` / `_SENHA` | Sua conta de acesso (não existe cadastro público) |
+   | `USUARIO_INICIAL_NOME` / `_EMAIL` / `_SENHA` | Sua conta de administrador (não existe cadastro público; as demais contas você cria no menu **Administração** do site) |
 
    `JWT_SECRET` é gerado pelo próprio Render.
 3. Clique em **Apply**. O primeiro build da API leva alguns minutos.

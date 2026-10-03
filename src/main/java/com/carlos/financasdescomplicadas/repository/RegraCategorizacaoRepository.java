@@ -23,4 +23,8 @@ public interface RegraCategorizacaoRepository extends JpaRepository<RegraCategor
     @Modifying
     @Query("delete from RegraCategorizacao r where r.categoria.id = :categoriaId")
     void deleteByCategoriaId(@Param("categoriaId") UUID categoriaId);
+
+    @Modifying
+    @Query("delete from RegraCategorizacao r where r.usuario.id = :usuarioId")
+    void deleteByUsuarioId(@Param("usuarioId") UUID usuarioId);
 }

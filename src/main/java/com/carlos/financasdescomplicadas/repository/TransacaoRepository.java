@@ -65,4 +65,8 @@ public interface TransacaoRepository extends JpaRepository<Transacao, UUID> {
     @Modifying
     @Query("delete from Transacao t where t.importacao.id = :importacaoId")
     int deleteByImportacaoId(@Param("importacaoId") UUID importacaoId);
+
+    @Modifying
+    @Query("delete from Transacao t where t.usuario.id = :usuarioId")
+    int deleteByUsuarioId(@Param("usuarioId") UUID usuarioId);
 }

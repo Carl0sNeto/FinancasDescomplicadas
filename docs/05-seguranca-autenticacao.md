@@ -2,7 +2,15 @@
 
 ## Decisão de produto
 
-Sem tela de cadastro público — login direto com credenciais criadas manualmente no banco (ou via um endpoint admin simples, ainda não implementado). Isso simplifica o Spring Security: sem fluxo de verificação de email, sem recuperação de senha pública.
+Sem tela de cadastro público — login direto com credenciais criadas por um administrador. Isso simplifica o Spring Security: sem fluxo de verificação de email, sem recuperação de senha pública.
+
+## Papéis (USUARIO e ADMIN)
+
+- Cada `USUARIO` tem um `papel`. A conta de `USUARIO_INICIAL_*` é `ADMIN` (criada ou promovida na subida, em `UsuarioInicialConfig`).
+- `UserDetailsServiceImpl` transforma o papel na authority `ROLE_USUARIO` / `ROLE_ADMIN`; como o filtro JWT recarrega o usuário a cada requisição, mudar o papel ou excluir a conta vale na hora, sem esperar o token expirar.
+- `SecurityConfig` restringe `/admin/**` a `hasRole("ADMIN")` e responde 403 em JSON pra quem está logado sem permissão.
+- `AdminController` (`/admin/usuarios`) lista, cria, troca a senha e exclui contas (com todos os dados delas); ninguém exclui a própria conta.
+- No frontend, o login guarda o `papel` e o menu mostra **Administração** (`admin.html`) só pra ADMIN — a proteção real é a da API.
 
 ## Fluxo de login
 
