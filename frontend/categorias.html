@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Categorias · Finanças Descomplicadas</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main>
+    <div class="cabecalho-pagina">
+      <h1>Categorias</h1>
+    </div>
+
+    <section class="cartao">
+      <h2>Nova categoria</h2>
+      <form id="form-nova" class="filtros" novalidate>
+        <div class="campo" style="flex: 1">
+          <label for="nova-nome">Nome</label>
+          <input id="nova-nome" name="nome" maxlength="60" required placeholder="Ex.: Mercado, Assinaturas, Freelas">
+        </div>
+        <div class="campo">
+          <label for="nova-tipo">Tipo</label>
+          <select id="nova-tipo" name="tipo">
+            <option value="DESPESA">Despesa</option>
+            <option value="RECEITA">Receita</option>
+          </select>
+        </div>
+        <button type="submit">Adicionar</button>
+      </form>
+    </section>
+
+    <div class="grade grade-2" style="margin-top: 16px">
+      <section class="cartao">
+        <h2>Despesas</h2>
+        <table><tbody id="lista-despesas"></tbody></table>
+      </section>
+      <section class="cartao">
+        <h2>Receitas</h2>
+        <table><tbody id="lista-receitas"></tbody></table>
+      </section>
+    </div>
+
+    <section class="cartao">
+      <h2>Regras de categorização automática</h2>
+      <p class="texto-suave" style="margin-top: -6px">
+        Criadas quando você categoriza uma transação marcando "lembrar". Na importação de extratos,
+        transações cuja descrição contém a palavra-chave recebem a categoria sozinhas.
+      </p>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th>Quando a descrição contiver</th><th>Categoria</th><th><span class="sr-only">Ações</span></th></tr>
+          </thead>
+          <tbody id="lista-regras"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="dialogo-editar">
+    <form id="form-editar" method="dialog" novalidate>
+      <h2>Editar categoria</h2>
+      <div class="campo">
+        <label for="editar-nome">Nome</label>
+        <input id="editar-nome" name="nome" maxlength="60" required>
+      </div>
+      <div class="campo">
+        <label for="editar-tipo">Tipo</label>
+        <select id="editar-tipo" name="tipo">
+          <option value="DESPESA">Despesa</option>
+          <option value="RECEITA">Receita</option>
+        </select>
+      </div>
+      <div class="acoes">
+        <button type="button" class="secundario" data-fechar>Cancelar</button>
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/categorias.js"></script>
+</body>
+</html>

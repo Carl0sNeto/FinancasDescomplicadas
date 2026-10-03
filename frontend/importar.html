@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Importar extrato · Finanças Descomplicadas</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <main>
+    <div class="cabecalho-pagina">
+      <h1>Importar extrato</h1>
+    </div>
+
+    <section class="cartao">
+      <p style="margin-top: 0">
+        Envie o extrato do seu banco em <strong>OFX</strong> ou o <strong>CSV do Nubank</strong>
+        (fatura do cartão ou extrato da conta). As transações são criadas e categorizadas
+        automaticamente pelas suas regras — o que não for reconhecido fica para você revisar.
+      </p>
+
+      <div id="resultado" hidden></div>
+
+      <form id="form-importar" novalidate>
+        <div class="zona-upload" id="zona-upload">
+          <strong>Arraste o arquivo aqui</strong>
+          <div class="texto-suave">ou escolha abaixo (.ofx ou .csv, até 5 MB)</div>
+          <label class="sr-only" for="arquivo">Arquivo do extrato</label>
+          <input id="arquivo" name="arquivo" type="file" accept=".ofx,.csv">
+        </div>
+        <div class="acoes" style="margin-top: 16px">
+          <button type="submit">Importar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="cartao">
+      <h2>Importações anteriores</h2>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr>
+              <th>Arquivo</th>
+              <th class="opcional">Formato</th>
+              <th>Importado em</th>
+              <th class="valor">Transações</th>
+              <th><span class="sr-only">Ações</span></th>
+            </tr>
+          </thead>
+          <tbody id="historico"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/importar.js"></script>
+</body>
+</html>
