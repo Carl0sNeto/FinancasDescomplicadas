@@ -1,7 +1,7 @@
 # Finanças Descomplicadas
 
 Site de organização financeira pessoal: receitas e despesas por categoria, metas, e importação
-automática de extrato bancário (OFX/CSV) com categorização que aprende com as suas correções.
+automática de extrato bancário (OFX, CSV ou PDF) com categorização que aprende com as suas correções.
 
 Projeto de portfólio com foco em backend Java/Spring Boot.
 
@@ -67,7 +67,7 @@ Erros voltam como JSON `{status, erro, mensagem, campos}`.
 | GET / POST / PUT / DELETE | `/categorias`, `/categorias/{id}` | CRUD de categorias |
 | GET / POST / PUT / DELETE | `/metas`, `/metas/{id}` | CRUD de metas |
 | POST | `/metas/{id}/movimentos` | Guarda (`valor` > 0) ou retira (`valor` < 0) dinheiro da meta |
-| POST | `/importacoes` | Upload multipart (campo `arquivo`, `.ofx` ou `.csv`) |
+| POST | `/importacoes` | Upload multipart (campo `arquivo`: `.ofx`, `.csv` ou `.pdf`; campo `senha` opcional, para PDF protegido) |
 | GET / DELETE | `/importacoes`, `/importacoes/{id}` | Histórico / desfazer importação |
 | GET / DELETE | `/regras`, `/regras/{id}` | Regras de categorização aprendidas |
 | GET / POST | `/admin/usuarios` | **Só ADMIN**: lista / cria contas (`{nome, email, senha, papel}`) |

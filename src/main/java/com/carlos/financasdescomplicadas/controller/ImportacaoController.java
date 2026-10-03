@@ -33,15 +33,16 @@ public class ImportacaoController {
         this.usuarioAutenticado = usuarioAutenticado;
     }
 
-    // Upload multipart com o campo "arquivo" (.ofx ou .csv)
+    // Upload multipart com o campo "arquivo" (.ofx, .csv ou .pdf) e, pra PDF protegido, "senha"
     @PostMapping(value = "/importacoes", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ResultadoImportacaoDTO> importar(@RequestParam("arquivo") MultipartFile arquivo) {
+    public ResponseEntity<ResultadoImportacaoDTO> importar(@RequestParam("arquivo") MultipartFile arquivo,
+                                                           @RequestParam(value = "senha", required = false) String senha) {
         if (arquivo.isEmpty()) {
             throw new RegraNegocioException("Envie um arquivo de extrato");
         }
         try (InputStream conteudo = arquivo.getInputStream()) {
             ResultadoImportacaoDTO resultado = importacaoService.importar(
-                    usuarioAutenticado.id(), arquivo.getOriginalFilename(), conteudo);
+                    usuarioAutenticado.id(), arquivo.getOriginalFilename(), conteudo, senha);
             return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
         } catch (IOException e) {
             throw new RegraNegocioException("Não foi possível ler o arquivo enviado", e);

@@ -41,4 +41,33 @@ Implementado, com alguns ajustes em relação ao desenho acima:
 - Ao categorizar manualmente com "lembrar", a regra nova também é aplicada às outras transações pendentes.
 - `DELETE /importacoes/{id}` desfaz uma importação (apaga as transações que ela criou).
 
-Extratos de exemplo em `docs/exemplos/`.
+Extratos de exemplo em `docs/exemplos/` (OFX, CSV e PDF).
+
+## PDF
+
+Para bancos que só exportam PDF, o `PdfParser` (Apache PDFBox) extrai o texto do documento e
+procura transações linha a linha. Como cada banco monta o PDF de um jeito, a leitura é por heurística:
+
+- **Linha de transação**: começa com data (`03/09/2026`, `03/09/26`, `03/09`, `03 SET`, `03/SET`) e tem
+  um valor brasileiro (`1.234,56`). O texto entre os dois é a descrição. Linhas sem data herdam a data
+  da anterior (vários extratos só mostram a data na primeira transação do dia).
+- **Saldo**: se houver dois valores na linha, o segundo é o saldo e é ignorado. Linhas de saldo, total,
+  limite, vencimento etc. são puladas.
+- **Sinal**, nesta ordem:
+  1. indicador explícito (`-50,00`, `50,00-`, `50,00 D` = débito; `+50,00`, `50,00 C` = crédito);
+  2. fatura de cartão (texto com "fatura" e "vencimento", sem "extrato"): compras vêm sem sinal,
+     então o sinal é invertido;
+  3. extrato sem indicador: crédito se a descrição tiver "recebido", "salário", "depósito", "estorno"...;
+     senão, débito.
+- **Ano**: datas sem ano usam o ano da data completa mais recente do documento; meses posteriores ao
+  dela são do ano anterior (compra de dezembro numa fatura de janeiro).
+- **PDF protegido**: o upload aceita o campo `senha` (muitos bancos usam parte do CPF). A senha não é guardada.
+- **Limites**: PDF escaneado (só imagem) não tem texto pra ler; layouts muito diferentes podem não ser
+  reconhecidos — a mensagem de erro sugere exportar em OFX/CSV. Conferir a importação e, se precisar,
+  desfazê-la.
+
+### Ajuste de esquema
+
+O Hibernate fixa os valores aceitos na coluna `importacao.formato` (restrição CHECK no PostgreSQL, tipo
+ENUM no H2) e o `ddl-auto=update` não atualiza isso quando o enum ganha `PDF`. O `AjusteEsquemaBanco`
+corrige bancos antigos na inicialização (remove a restrição desatualizada / converte o ENUM em texto).

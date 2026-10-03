@@ -176,10 +176,10 @@ class FluxoPrincipalIntegrationTest {
     @Test
     void importacaoRecusaFormatoDesconhecido() throws Exception {
         mockMvc.perform(multipart("/importacoes")
-                        .file(arquivo("extrato.pdf", "qualquer coisa"))
+                        .file(arquivo("extrato.xlsx", "qualquer coisa"))
                         .header("Authorization", token))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.mensagem").value(org.hamcrest.Matchers.containsString(".ofx ou .csv")));
+                .andExpect(jsonPath("$.mensagem").value(org.hamcrest.Matchers.containsString(".ofx, .csv ou .pdf")));
     }
 
     @Test
