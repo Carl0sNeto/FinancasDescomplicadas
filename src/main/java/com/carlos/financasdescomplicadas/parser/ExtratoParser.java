@@ -16,5 +16,13 @@ public interface ExtratoParser {
 
     List<TransacaoBruta> parse(InputStream arquivo);
 
+    /**
+     * Versão com a senha do arquivo, usada por formatos que podem vir protegidos (PDF).
+     * Os demais formatos ignoram a senha.
+     */
+    default List<TransacaoBruta> parse(InputStream arquivo, String senha) {
+        return parse(arquivo);
+    }
+
     FormatoExtrato formato();
 }

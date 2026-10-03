@@ -36,6 +36,9 @@ form.addEventListener('submit', async (evento) => {
 
   const dados = new FormData();
   dados.append('arquivo', arquivo);
+  if (ehPdf(arquivo) && form.senha.value) {
+    dados.append('senha', form.senha.value);
+  }
 
   try {
     const r = await comCarregamento(form.querySelector('[type=submit]'),
@@ -49,6 +52,7 @@ form.addEventListener('submit', async (evento) => {
         : '.'}`;
     resultado.hidden = false;
     form.reset();
+    atualizarCampoSenha();
     await carregarHistorico();
   } catch (erro) {
     resultado.className = 'aviso erro';
@@ -83,7 +87,19 @@ zona.addEventListener('drop', (evento) => {
   evento.preventDefault();
   if (evento.dataTransfer.files.length) {
     campoArquivo.files = evento.dataTransfer.files;
+    atualizarCampoSenha();
   }
 });
+
+// A senha só faz sentido pra PDF
+function ehPdf(arquivo) {
+  return arquivo?.name.toLowerCase().endsWith('.pdf');
+}
+
+function atualizarCampoSenha() {
+  document.getElementById('campo-senha').hidden = !ehPdf(campoArquivo.files[0]);
+}
+
+campoArquivo.addEventListener('change', atualizarCampoSenha);
 
 carregarHistorico();

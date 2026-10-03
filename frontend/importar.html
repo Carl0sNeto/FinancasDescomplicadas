@@ -14,9 +14,13 @@
 
     <section class="cartao">
       <p style="margin-top: 0">
-        Envie o extrato do seu banco em <strong>OFX</strong> ou o <strong>CSV do Nubank</strong>
-        (fatura do cartão ou extrato da conta). As transações são criadas e categorizadas
-        automaticamente pelas suas regras — o que não for reconhecido fica para você revisar.
+        Envie o extrato ou a fatura do seu banco em <strong>OFX</strong>, <strong>CSV do Nubank</strong>
+        ou <strong>PDF</strong>. As transações são criadas e categorizadas automaticamente pelas
+        suas regras — o que não for reconhecido fica para você revisar.
+      </p>
+      <p class="texto-suave">
+        Prefira OFX ou CSV quando o banco oferecer: no PDF, a leitura é feita pelo texto do documento
+        e pode errar em layouts incomuns. Confira as transações depois — dá pra desfazer a importação abaixo.
       </p>
 
       <div id="resultado" hidden></div>
@@ -24,9 +28,14 @@
       <form id="form-importar" novalidate>
         <div class="zona-upload" id="zona-upload">
           <strong>Arraste o arquivo aqui</strong>
-          <div class="texto-suave">ou escolha abaixo (.ofx ou .csv, até 5 MB)</div>
+          <div class="texto-suave">ou escolha abaixo (.ofx, .csv ou .pdf, até 5 MB)</div>
           <label class="sr-only" for="arquivo">Arquivo do extrato</label>
-          <input id="arquivo" name="arquivo" type="file" accept=".ofx,.csv">
+          <input id="arquivo" name="arquivo" type="file" accept=".ofx,.csv,.pdf">
+        </div>
+        <div class="campo" id="campo-senha" style="margin-top: 16px; max-width: 360px" hidden>
+          <label for="senha-pdf">Senha do PDF (se o arquivo for protegido)</label>
+          <input id="senha-pdf" name="senha" type="password" autocomplete="off">
+          <small class="texto-suave">Muitos bancos usam os primeiros dígitos do CPF.</small>
         </div>
         <div class="acoes" style="margin-top: 16px">
           <button type="submit">Importar</button>

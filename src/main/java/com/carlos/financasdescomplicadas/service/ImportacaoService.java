@@ -49,14 +49,15 @@ public class ImportacaoService {
     }
 
     @Transactional
-    public ResultadoImportacaoDTO importar(UUID usuarioId, String nomeArquivo, InputStream conteudo) {
+    // senha: só para PDFs protegidos; os outros formatos ignoram
+    public ResultadoImportacaoDTO importar(UUID usuarioId, String nomeArquivo, InputStream conteudo, String senha) {
         ExtratoParser parser = parsers.stream()
                 .filter(p -> p.suporta(nomeArquivo))
                 .findFirst()
                 .orElseThrow(() -> new RegraNegocioException(
-                        "Formato de arquivo não suportado. Envie um extrato .ofx ou .csv"));
+                        "Formato de arquivo não suportado. Envie um extrato .ofx, .csv ou .pdf"));
 
-        List<TransacaoBruta> brutas = parser.parse(conteudo);
+        List<TransacaoBruta> brutas = parser.parse(conteudo, senha);
         if (brutas.isEmpty()) {
             throw new RegraNegocioException("Nenhuma transação encontrada no arquivo");
         }
